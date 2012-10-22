@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-case node[:platform]
+case node['platform']
 when "opensuse"
   package "mono-stable"
 when "debian", "ubuntu"
