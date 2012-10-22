@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mono
-# Recipe:: source
+# Recipe:: install_packages
 # Author:: Guilhem Lettron <guilhem.lettron@youscribe.com>
 #
 # Copyright 2012, Societe Publica.
@@ -18,30 +18,9 @@
 # limitations under the License.
 #
 
-include_recipe "build-essential"
-include_recipe "git"
-
-installation_dir = "/usr/local/src/mono"
-
-packages = value_for_platform(
-    "default" => [ 'zlib1g-dev', 'autoconf', 'automake']
-  )
-
-packages.each do |devpkg|
-  package devpkg
-end
-
-git installation_dir do
-  repository "git://github.com/mono/mono.git"
-  reference node['mono']['branch']
-  action :sync
-end
-
-bash "compile_mono_source" do
-  user "root"
-  cwd installation_dir
-  code <<-EOH
-    ./autogen.sh --prefix=#{node['mono']['prefix']}
-    make get-monolite-latest && make EXTERNAL_MCS=${PWD}/mcs/class/lib/monolite/gmcs.exe &&	make install
-  EOH
+case node['platform']
+when "opensuse"
+  package "mono-stable"
+when "debian", "ubuntu"
+  package "mono-complete"
 end

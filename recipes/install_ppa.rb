@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mono
-# Recipe:: latest
+# Recipe:: install_ppa
 # Author:: Guilhem Lettron <guilhem.lettron@youscribe.com>
 #
 # Copyright 2012, Societe Publica.
