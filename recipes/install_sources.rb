@@ -24,7 +24,7 @@ include_recipe "git"
 installation_dir = "/usr/local/src/mono"
 
 packages = value_for_platform(
-    "default" => [ 'zlib1g-dev', 'autoconf', 'automake']
+    "default" => [ 'zlib1g-dev', 'autoconf', 'automake', 'libtool', 'gettext']
   )
 
 packages.each do |devpkg|
@@ -35,6 +35,7 @@ git installation_dir do
   repository "git://github.com/mono/mono.git"
   reference node['mono']['branch']
   action :sync
+  notifies :run, "bash[compile_mono_source]"
 end
 
 bash "compile_mono_source" do
@@ -44,4 +45,5 @@ bash "compile_mono_source" do
     ./autogen.sh --prefix=#{node['mono']['prefix']}
     make get-monolite-latest && make EXTERNAL_MCS=${PWD}/mcs/class/lib/monolite/gmcs.exe &&	make install
   EOH
+  action :nothing
 end
