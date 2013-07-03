@@ -21,6 +21,8 @@
 include_recipe "build-essential"
 include_recipe "git"
 
+include_recipe "mono::libgdiplus"
+
 installation_dir = "/usr/local/src/mono"
 
 packages = value_for_platform(
@@ -42,7 +44,7 @@ bash "compile_mono_source" do
   user "root"
   cwd installation_dir
   code <<-EOH
-    ./autogen.sh --prefix=#{node['mono']['prefix']}
+    ./autogen.sh --prefix=#{node['mono']['prefix']} --with-libgdiplus=/usr/lib/
     make get-monolite-latest && make EXTERNAL_MCS=${PWD}/mcs/class/lib/monolite/gmcs.exe &&	make install
   EOH
   action :nothing
