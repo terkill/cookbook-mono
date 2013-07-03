@@ -1,3 +1,4 @@
+name             "mono"
 maintainer       "Youscribe"
 maintainer_email "guilhem.lettron@youscribe.com"
 license          "Apache 2.0"
