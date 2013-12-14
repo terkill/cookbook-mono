@@ -19,13 +19,14 @@
 #
 
 
-if node['lsb']['codename'] == "lucid" 
-  apt_repository "badgerport" do
-    uri "http://badgerports.org"
+if ["lucid", "precise", "raring", "saucy"].include?(node['lsb']['codename'])
+  apt_repository "mono-3-ppa" do
+    uri "http://ppa.launchpad.net/v-kukol/mono-testing/ubuntu"
     distribution node['lsb']['codename']
     components ["main"]
-    key "http://badgerports.org/directhex.ppa.asc"
+    keyserver "keyserver.ubuntu.com"
+    key "0ADB8C6C"
   end
 end
 
-include_recipe "mono::default"
+include_recipe ['mono::install_packages']
