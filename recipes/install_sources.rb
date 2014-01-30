@@ -34,7 +34,7 @@ packages.each do |devpkg|
 end
 
 git installation_dir do
-  repository "git://github.com/mono/mono.git"
+  repository node['mono']['repo']
   reference node['mono']['branch']
   action :sync
   notifies :run, "bash[compile_mono_source]"

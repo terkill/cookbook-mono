@@ -1,4 +1,5 @@
 default['mono']['install_method'] = "packages"
+default['mono']['repo'] = "git://github.com/mono/mono.git"
 
 case platform
 when "debian","ubuntu"
