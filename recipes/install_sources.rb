@@ -45,7 +45,7 @@ bash "compile_mono_source" do
   cwd installation_dir
   code <<-EOH
     ./autogen.sh --prefix=#{node['mono']['prefix']} --with-libgdiplus=/usr/lib/
-    make monolite_url=http://storage.bos.xamarin.com/mono-dist-master/bf/bf17a43b31a2be16f462ffdf1ae3d9801b846e90/monolite-110-latest.tar.gz get-monolite-latest && make EXTERNAL_MCS=${PWD}/mcs/class/lib/monolite/gmcs.exe &&	make install
+    make monolite_url=#{node['mono']['monolite-url']} get-monolite-latest && make EXTERNAL_MCS=${PWD}/mcs/class/lib/monolite/gmcs.exe &&	make install
   EOH
   action :nothing
 end
