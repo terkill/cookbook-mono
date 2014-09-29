@@ -19,13 +19,12 @@
 #
 
 
-if ["lucid", "precise", "raring", "saucy"].include?(node['lsb']['codename'])
-  apt_repository "mono-3-ppa" do
-    uri "http://ppa.launchpad.net/v-kukol/mono-testing/ubuntu"
-    distribution node['lsb']['codename']
+if ["lucid", "precise", "raring", "saucy", "trusty"].include?(node['lsb']['codename'])
+  apt_repository "mono-project" do
+    uri "http://download.mono-project.com/repo/debian"
+    distribution "wheezy"
     components ["main"]
-    keyserver "keyserver.ubuntu.com"
-    key "0ADB8C6C"
+    key "http://download.mono-project.com/repo/xamarin.gpg"
   end
 end
 
