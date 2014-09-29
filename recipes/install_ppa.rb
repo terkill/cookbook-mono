@@ -28,4 +28,22 @@ if ["lucid", "precise", "raring", "saucy", "trusty"].include?(node['lsb']['coden
   end
 end
 
+if ["precise"].include?(node['lsb']['codename'])
+  apt_repository "mono-compat" do
+    uri "http://download.mono-project.com/repo/debian"
+    distribution "wheezy-libtiff-compat"
+    components ["main"]
+    key "http://download.mono-project.com/repo/xamarin.gpg"
+  end
+end
+
+if ["saucy", "trusty"].include?(node['lsb']['codename'])
+  apt_repository "mono-compat" do
+    uri "http://download.mono-project.com/repo/debian"
+    distribution "wheezy-apache24-compat"
+    components ["main"]
+    key "http://download.mono-project.com/repo/xamarin.gpg"
+  end
+end
+
 include_recipe ['mono::install_packages']
