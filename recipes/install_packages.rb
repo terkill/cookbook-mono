@@ -18,9 +18,15 @@
 # limitations under the License.
 #
 
-case node['platform']
-when "opensuse"
+if platform_family?('suse')
   package "mono-stable"
-when "debian", "ubuntu"
+elsif platform_family?('debian')
+  package "mono-complete"
+elsif platform_family?('rhel')
+  yum_repository 'mono' do
+    description "Mono repository"
+    baseurl node['mono']['yum_repository']
+    gpgkey node['mono']['yum_repository_key']
+  end
   package "mono-complete"
 end
