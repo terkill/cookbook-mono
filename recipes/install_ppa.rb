@@ -24,7 +24,7 @@ apt_repository "mono-project" do
   distribution "wheezy"
   components ["main"]
   key "http://download.mono-project.com/repo/xamarin.gpg"
-  only_fi { ["lucid", "precise", "raring", "saucy", "trusty"].include?(node['lsb']['codename']) }
+  only_if { ["lucid", "precise", "raring", "saucy", "trusty"].include?(node['lsb']['codename']) }
 end
 
 apt_repository "mono-compat" do
