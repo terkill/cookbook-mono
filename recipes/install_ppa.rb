@@ -24,7 +24,7 @@ apt_repository "mono-project" do
   distribution "wheezy"
   components ["main"]
   key "http://download.mono-project.com/repo/xamarin.gpg"
-  only_if { ["lucid", "precise", "raring", "saucy", "trusty"].include?(node['lsb']['codename']) }
+  only_if { ["lucid", "precise", "raring", "saucy", "trusty", "jessie"].include?(node['lsb']['codename']) }
 end
 
 apt_repository "mono-compat" do
@@ -35,12 +35,20 @@ apt_repository "mono-compat" do
   only_if { ["precise"].include?(node['lsb']['codename']) }
 end
 
-apt_repository "mono-compat" do
+apt_repository "mono-apache24-compat" do
   uri "http://download.mono-project.com/repo/debian"
   distribution "wheezy-apache24-compat"
   components ["main"]
   key "http://download.mono-project.com/repo/xamarin.gpg"
-  only_if { ["saucy", "trusty"].include?(node['lsb']['codename']) }
+  only_if { ["saucy", "trusty", "jessie"].include?(node['lsb']['codename']) }
+end
+
+apt_repository "mono-libjpeg62-compat" do
+  uri "http://download.mono-project.com/repo/debian"
+  distribution "wheezy-libjpeg62-compat"
+  components ["main"]
+  key "http://download.mono-project.com/repo/xamarin.gpg"
+  only_if { ["jessie"].include?(node['lsb']['codename']) }
 end
 
 include_recipe ['mono::install_packages']
